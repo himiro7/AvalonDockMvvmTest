@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonDockMvvmTest", "AvalonDockMvvmTest\AvalonDockMvvmTest.csproj", "{678D82F5-9464-470E-9101-2D7E4CBAC33E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{678D82F5-9464-470E-9101-2D7E4CBAC33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678D82F5-9464-470E-9101-2D7E4CBAC33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678D82F5-9464-470E-9101-2D7E4CBAC33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678D82F5-9464-470E-9101-2D7E4CBAC33E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

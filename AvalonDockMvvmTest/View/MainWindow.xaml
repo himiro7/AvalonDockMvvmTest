@@ -1,0 +1,67 @@
+﻿<Window x:Class="AvalonDockMvvmTest.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalonDock="http://avalondock.codeplex.com"
+        xmlns:pane="clr-namespace:AvalonDockMvvmTest.View.Pane"
+        xmlns:conv="clr-namespace:AvalonDockMvvmTest.Converter"
+        xmlns:local="clr-namespace:AvalonDockMvvmTest.ViewModel"
+        Title="MainWindow" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <conv:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+  </Window.Resources>
+  <Window.DataContext>
+    <local:MainWindowViewModel />
+  </Window.DataContext>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Menu Grid.Row="0" >
+      <MenuItem Header="File" >
+        <MenuItem Header="New" Command="{Binding Path=NewCommand}" />
+        <MenuItem Header="Open" Command="{Binding Path=OpenCommand}" />
+      </MenuItem>
+    </Menu>
+    <avalonDock:DockingManager x:Name="dockManager" Grid.Row="1"
+                               DocumentsSource="{Binding Files}"
+                               ActiveContent="{Binding ActiveDocument, Mode=TwoWay,Converter={StaticResource ActiveDocumentConverter}}"
+                               >
+      <avalonDock:DockingManager.LayoutItemTemplateSelector>
+        <pane:PanesTemplateSelector>
+          <pane:PanesTemplateSelector.FileViewTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Path=TextContent, UpdateSourceTrigger=PropertyChanged}" />
+              <!--<TextBox Text="{Binding Path=TextContext}" />-->
+            </DataTemplate>
+          </pane:PanesTemplateSelector.FileViewTemplate>
+        </pane:PanesTemplateSelector>
+      </avalonDock:DockingManager.LayoutItemTemplateSelector>
+
+      <avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+        <pane:PanesStyleSelector>
+          <pane:PanesStyleSelector.FileStyle>
+            <Style TargetType="{x:Type avalonDock:LayoutItem}">
+              <Setter Property="Title" Value="{Binding Model.Title}"/>
+              <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+              <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
+              <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+              <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+            </Style>
+          </pane:PanesStyleSelector.FileStyle>
+        </pane:PanesStyleSelector>
+      </avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+
+      <avalonDock:DockingManager.LayoutUpdateStrategy>
+        <pane:LayoutInitializer/>
+      </avalonDock:DockingManager.LayoutUpdateStrategy>
+
+      <avalonDock:LayoutRoot>
+        <avalonDock:LayoutPanel Orientation="Vertical">
+          <avalonDock:LayoutDocumentPane/>
+        </avalonDock:LayoutPanel>
+      </avalonDock:LayoutRoot>
+    </avalonDock:DockingManager>
+  </Grid>
+</Window>
